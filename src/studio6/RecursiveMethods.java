@@ -14,7 +14,12 @@ public class RecursiveMethods {
 	public static double geometricSum(int n) {
 		
 			// FIXME compute the geometric sum for the first n terms recursively
-			return 0;
+			if (n == 0) {
+				return 0;
+			}
+			else {
+				return geometricSum(n - 1) + Math.pow(0.5, n);
+			}
 		
 	}
 
@@ -29,7 +34,12 @@ public class RecursiveMethods {
 	public static int gcd(int p, int q) {
 		
 			// FIXME compute the gcd of p and q using recursion
-			return 0;
+			if (p % q == 0) {
+				return 0;
+			}
+			else {
+				return gcd(q, p % q);
+			}
 		
 	}
 
@@ -44,9 +54,36 @@ public class RecursiveMethods {
 	public static int[] toReversed(int[] array) {
 		
 			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+			int[] reversed = new int[array.length];
+			return arrayHelper(array, reversed, array.length);
+				
+	}
+	public static int[] arrayHelper(int[] array, int[] reversed, int index) {
+		if (index == 0) {
+			return reversed;
+		}
+		else {
+			reversed[reversed.length - 1] = array[index - 1];
+			return arrayHelper(array, reversed, index - 1);
+		}
 		
 	}
+	
+	/**
+	public static int[] toReversed(int[] array) {
+		int[] reversed = new int[array.length];
+		if (array.length > 0) {
+			int lastIndex = array.length - 1;
+			for (int index = 0; index <= array.length / 2; ++index) {
+				int mirrorIndex = lastIndex - index;
+				// note:
+				// since we read from array and write to reversed
+				// we do not need to use a temp variable
+				reversed[index] = array[mirrorIndex];
+				reversed[mirrorIndex] = array[index];
+			}
+		}
+		return reversed;
 
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
